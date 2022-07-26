@@ -10,4 +10,4 @@ services:
     restart: "no"
     volumes:
       - /mnt/hdd_drive/discordchatdumper-store:/app/dumps
-      - /var/docker_data/discordchatdumper-config/:app/config
+      - /var/docker_data/discordchatdumper-config/:/app/config
