@@ -11,6 +11,6 @@ public class Settings
     public static Settings Load(string path)
     {
         string rawString = File.ReadAllText(path);
-        return JsonConvert.DeserializeObject<Settings>(path);
+        return JsonConvert.DeserializeObject<Settings>(rawString);
     }
 }

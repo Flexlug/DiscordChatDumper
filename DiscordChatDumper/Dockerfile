@@ -15,5 +15,4 @@ RUN dotnet publish "DiscordChatDumper.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "DiscordChatDumper.dll"]
-CMD "dump guild"
+ENTRYPOINT ["sh", "-c", "dotnet DiscordChatDumper.dll dump guild"]
