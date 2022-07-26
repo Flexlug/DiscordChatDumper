@@ -1,5 +1,6 @@
 ﻿using DSharpPlus.Entities;
 using Newtonsoft.Json;
+using ErrorEventArgs = Newtonsoft.Json.Serialization.ErrorEventArgs;
 
 namespace DiscordChatDumper;
 
@@ -32,7 +33,10 @@ public class MessageWriter
         var lastIndex = messages.Count - 1;
         for (int i = 0; i < messages.Count; i++)
         {
-            var strMessage = JsonConvert.SerializeObject(messages[i]);
+            var strMessage = JsonConvert.SerializeObject(messages[i], new JsonSerializerSettings()
+            {
+                Error = HandleDeserializationError
+            });
             _writer.Write(strMessage);
 
             if (i != lastIndex)
@@ -40,5 +44,11 @@ public class MessageWriter
         }
         _messageCount += messages.Count;
         Console.WriteLine($"Wrote {_messageCount} messages...");
+    }
+
+    private void HandleDeserializationError(object? sender, ErrorEventArgs errorArgs)
+    {
+        var currentError = errorArgs.ErrorContext.Error.Message;
+        errorArgs.ErrorContext.Handled = true;
     }
 }
