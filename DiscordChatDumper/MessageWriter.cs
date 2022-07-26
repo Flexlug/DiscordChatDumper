@@ -38,10 +38,6 @@ public class MessageWriter
             if (i != lastIndex)
                 _writer.WriteLine(',');
         }
-
-        var position = Console.GetCursorPosition();
-        Console.SetCursorPosition(position.Left, position.Top - 1);
-
         _messageCount += messages.Count;
         Console.WriteLine($"Wrote {_messageCount} messages...");
     }
