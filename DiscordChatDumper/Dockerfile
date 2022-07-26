@@ -3,8 +3,7 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["DiscordChatDumper/DiscordChatDumper.csproj", "DiscordChatDumper/"]
-RUN dotnet restore "DiscordChatDumper/DiscordChatDumper.csproj"
+RUN dotnet restore "DiscordChatDumper.csproj"
 COPY . .
 WORKDIR "/src/DiscordChatDumper"
 RUN dotnet build "DiscordChatDumper.csproj" -c Release -o /app/build
@@ -16,4 +15,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "DiscordChatDumper.dll"]
-CMD["dump guild"]
+CMD "dump guild"
