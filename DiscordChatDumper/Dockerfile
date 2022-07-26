@@ -3,7 +3,8 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-RUN dotnet restore "DiscordChatDumper.csproj"
+COPY ["DiscordChatDumper/DiscordChatDumper.csproj", "DiscordChatDumper/"]
+RUN dotnet restore "DiscordChatDumper/DiscordChatDumper.csproj"
 COPY . .
 WORKDIR "/src/DiscordChatDumper"
 RUN dotnet build "DiscordChatDumper.csproj" -c Release -o /app/build
