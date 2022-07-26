@@ -1,0 +1,13 @@
+
+version: '3.8'
+
+services:
+  discordchatdumper:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: flexlug/discordchatdumper
+    restart: "no"
+    volumes:
+      - /mnt/hdd_drive/discordchatdumper-store:/app/dumps
+      - /var/docker_data/discordchatdumper-config/:app/config
